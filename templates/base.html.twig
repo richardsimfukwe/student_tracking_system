@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% include"includes/css.html.twig" %}
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    {% include"includes/side_menu.html.twig" %}
+    {% include"includes/top_bar.html.twig" %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+     {% include"includes/footer.html.twig" %}
+    {% include"includes/js.html.twig" %}
+    </body>
+</html>
