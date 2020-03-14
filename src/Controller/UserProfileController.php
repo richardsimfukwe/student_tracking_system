@@ -12,8 +12,10 @@ class UserProfileController extends AbstractController
      */
     public function index()
     {
+
         return $this->render('user_profile/index.html.twig', [
             'controller_name' => 'UserProfileController',
+
         ]);
     }
 }
