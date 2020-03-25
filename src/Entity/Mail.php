@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Mail
  *
- * @ORM\Table(name="mail", indexes={@ORM\Index(name="fk_mail_person1_idx", columns={"person_person_id"})})
+ * @ORM\Table(name="mail", indexes={@ORM\Index(name="fk_mail_person1_idx", columns={"person_id"})})
  * @ORM\Entity
  */
 class Mail
@@ -54,10 +54,10 @@ class Mail
      *
      * @ORM\ManyToOne(targetEntity="Person")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="person_person_id", referencedColumnName="person_id")
+     *   @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      * })
      */
-    private $personPerson;
+    private $person;
 
     public function getId(): ?int
     {
@@ -112,14 +112,14 @@ class Mail
         return $this;
     }
 
-    public function getPersonPerson(): ?Person
+    public function getPerson(): ?Person
     {
-        return $this->personPerson;
+        return $this->person;
     }
 
-    public function setPersonPerson(?Person $personPerson): self
+    public function setPerson(?Person $person): self
     {
-        $this->personPerson = $personPerson;
+        $this->person = $person;
 
         return $this;
     }

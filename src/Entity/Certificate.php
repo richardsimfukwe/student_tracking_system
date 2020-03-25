@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Certificate
  *
- * @ORM\Table(name="certificate", indexes={@ORM\Index(name="fk_certificate_certificate_type1_idx", columns={"certificate_type_id"}), @ORM\Index(name="fk_certificate_person1_idx", columns={"person_person_id"})})
+ * @ORM\Table(name="certificate", indexes={@ORM\Index(name="fk_certificate_person1_idx", columns={"person_id"}), @ORM\Index(name="fk_certificate_certificate_type1_idx", columns={"certificate_type_id"})})
  * @ORM\Entity
  */
 class Certificate
@@ -50,10 +50,10 @@ class Certificate
      *
      * @ORM\ManyToOne(targetEntity="Person")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="person_person_id", referencedColumnName="person_id")
+     *   @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      * })
      */
-    private $personPerson;
+    private $person;
 
     public function getId(): ?int
     {
@@ -96,14 +96,14 @@ class Certificate
         return $this;
     }
 
-    public function getPersonPerson(): ?Person
+    public function getPerson(): ?Person
     {
-        return $this->personPerson;
+        return $this->person;
     }
 
-    public function setPersonPerson(?Person $personPerson): self
+    public function setPerson(?Person $person): self
     {
-        $this->personPerson = $personPerson;
+        $this->person = $person;
 
         return $this;
     }

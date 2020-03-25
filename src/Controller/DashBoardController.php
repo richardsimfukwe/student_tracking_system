@@ -26,16 +26,17 @@ class DashBoardController extends AbstractController
             'personId' => $request->query->get('password')
         ]);
 
+
+
         if (!$person) {
             throw $this->createNotFoundException(
                 'No product found for id ' . $request->query->get('password')
             );
+        } else if ($person) {
+            return $this->render('dash_board/index.html.twig', [
+                'controller_name' => 'DashBoardController',
+                'Pdata' => $person
+            ]);
         }
-else if($person){
-        return $this->render('dash_board/index.html.twig', [
-            'controller_name' => 'DashBoardController',
-            'Pdata'=> $person
-        ]);
-    }
     }
 }

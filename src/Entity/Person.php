@@ -7,24 +7,17 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Person
  *
- * @ORM\Table(name="person", indexes={@ORM\Index(name="fk_person_department1_idx", columns={"department_id"}), @ORM\Index(name="id", columns={"id"}), @ORM\Index(name="fk_person_program1_idx", columns={"program_id"}), @ORM\Index(name="fk_person_person_type_idx", columns={"person_type_id"})})
+ * @ORM\Table(name="person", uniqueConstraints={@ORM\UniqueConstraint(name="person_id_UNIQUE", columns={"person_id"})}, indexes={@ORM\Index(name="fk_person_department1_idx", columns={"department_id"}), @ORM\Index(name="id", columns={"id"}), @ORM\Index(name="fk_person_program1_idx", columns={"program_id"}), @ORM\Index(name="fk_person_person_type_idx", columns={"person_type_id"}), @ORM\Index(name="fk_person_gender1_idx", columns={"gender_id"})})
  * @ORM\Entity
  */
 class Person
 {
     /**
-     * @var string
-     *
-     * @ORM\Column(name="person_id", type="string", length=25, nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $personId;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -41,6 +34,13 @@ class Person
      * @ORM\Column(name="lname", type="string", length=25, nullable=true, options={"default"="NULL"})
      */
     private $lname = 'NULL';
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="dob", type="date", nullable=true, options={"default"="NULL"})
+     */
+    private $dob = 'NULL';
 
     /**
      * @var string|null
@@ -80,16 +80,16 @@ class Person
     /**
      * @var string|null
      *
-     * @ORM\Column(name="gender", type="string", length=10, nullable=true, options={"default"="NULL"})
-     */
-    private $gender = 'NULL';
-
-    /**
-     * @var string|null
-     *
      * @ORM\Column(name="email", type="string", length=20, nullable=true, options={"default"="NULL"})
      */
     private $email = 'NULL';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="person_id", type="string", length=25, nullable=false)
+     */
+    private $personId;
 
     /**
      * @var string|null
@@ -107,6 +107,16 @@ class Person
      * })
      */
     private $department;
+
+    /**
+     * @var \Gender
+     *
+     * @ORM\ManyToOne(targetEntity="Gender")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="gender_id", referencedColumnName="id")
+     * })
+     */
+    private $gender;
 
     /**
      * @var \PersonType
@@ -128,21 +138,9 @@ class Person
      */
     private $program;
 
-    public function getPersonId(): ?string
-    {
-        return $this->personId;
-    }
-
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getFname(): ?string
@@ -165,6 +163,18 @@ class Person
     public function setLname(?string $lname): self
     {
         $this->lname = $lname;
+
+        return $this;
+    }
+
+    public function getDob(): ?\DateTimeInterface
+    {
+        return $this->dob;
+    }
+
+    public function setDob(?\DateTimeInterface $dob): self
+    {
+        $this->dob = $dob;
 
         return $this;
     }
@@ -229,18 +239,6 @@ class Person
         return $this;
     }
 
-    public function getGender(): ?string
-    {
-        return $this->gender;
-    }
-
-    public function setGender(?string $gender): self
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -249,6 +247,18 @@ class Person
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPersonId(): ?string
+    {
+        return $this->personId;
+    }
+
+    public function setPersonId(string $personId): self
+    {
+        $this->personId = $personId;
 
         return $this;
     }
@@ -273,6 +283,18 @@ class Person
     public function setDepartment(?Department $department): self
     {
         $this->department = $department;
+
+        return $this;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }
