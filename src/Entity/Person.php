@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Person
  *
- * @ORM\Table(name="person", uniqueConstraints={@ORM\UniqueConstraint(name="person_id_UNIQUE", columns={"person_id"})}, indexes={@ORM\Index(name="fk_person_department1_idx", columns={"department_id"}), @ORM\Index(name="id", columns={"id"}), @ORM\Index(name="fk_person_program1_idx", columns={"program_id"}), @ORM\Index(name="fk_person_person_type_idx", columns={"person_type_id"}), @ORM\Index(name="fk_person_gender1_idx", columns={"gender_id"})})
+ * @ORM\Table(name="person", uniqueConstraints={@ORM\UniqueConstraint(name="person_id_UNIQUE", columns={"person_id"})}, indexes={@ORM\Index(name="fk_person_department1_idx", columns={"department_id"}), @ORM\Index(name="fk_person_gender1_idx", columns={"gender_id"}), @ORM\Index(name="id", columns={"id"}), @ORM\Index(name="fk_person_program1_idx", columns={"program_id"}), @ORM\Index(name="fk_person_person_type_idx", columns={"person_type_id"})})
  * @ORM\Entity
  */
 class Person
@@ -24,65 +24,65 @@ class Person
     /**
      * @var string|null
      *
-     * @ORM\Column(name="fname", type="string", length=25, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="fname", type="string", length=25, nullable=true)
      */
-    private $fname = 'NULL';
+    private $fname;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="lname", type="string", length=25, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="lname", type="string", length=25, nullable=true)
      */
-    private $lname = 'NULL';
+    private $lname;
 
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="dob", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="dob", type="date", nullable=true)
      */
-    private $dob = 'NULL';
+    private $dob;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="address", type="string", length=50, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="address", type="string", length=50, nullable=true)
      */
-    private $address = 'NULL';
+    private $address;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="mobile_no", type="string", length=15, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="mobile_no", type="string", length=15, nullable=true)
      */
-    private $mobileNo = 'NULL';
+    private $mobileNo;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="postcode", type="string", length=50, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="postcode", type="string", length=50, nullable=true)
      */
-    private $postcode = 'NULL';
+    private $postcode;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="person_image", type="blob", length=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="person_image", type="string", length=50, nullable=true)
      */
-    private $personImage = 'NULL';
+    private $personImage;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
-    private $description = 'NULL';
+    private $description;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="email", type="string", length=20, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="email", type="string", length=20, nullable=true)
      */
-    private $email = 'NULL';
+    private $email;
 
     /**
      * @var string
@@ -94,9 +94,9 @@ class Person
     /**
      * @var string|null
      *
-     * @ORM\Column(name="social_url", type="string", length=25, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="social_url", type="string", length=25, nullable=true)
      */
-    private $socialUrl = 'NULL';
+    private $socialUrl;
 
     /**
      * @var \Department
@@ -215,12 +215,12 @@ class Person
         return $this;
     }
 
-    public function getPersonImage()
+    public function getPersonImage(): ?string
     {
         return $this->personImage;
     }
 
-    public function setPersonImage($personImage): self
+    public function setPersonImage(?string $personImage): self
     {
         $this->personImage = $personImage;
 
